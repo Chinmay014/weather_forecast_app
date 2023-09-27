@@ -4,10 +4,14 @@ import os,requests
 api_key = os.getenv("OPENWEATHER")
 
 def get_forecast_data(place,days): 
-    url = f"http://api.openweathermap.org/data/2.5/forecast?q={place}&appid={api_key}"
-    response = requests.get(url)
-    content = response.json()
-    filtered_data = content["list"]
+    try:
+        url = f"http://api.openweathermap.org/data/2.5/forecast?q={place}&appid={api_key}"
+        response = requests.get(url)
+        content = response.json()
+        filtered_data = content["list"]
+        print(type(filtered_data))
+    except KeyError:
+        return "No data found. Perhaps try lower case letters? Or maybe the city doesn't exist."
     num_values = 8*days
     filtered_data = filtered_data[:num_values]
     return filtered_data
