@@ -1,4 +1,5 @@
 import streamlit as st
+import plotly.express as px
 
 st.title("Weather forecast for the next days")
 # st.write("Place:")
